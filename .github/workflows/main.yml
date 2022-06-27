@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Cloud_function_deploy:
+    runs-on: ubuntu-latest
+  
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Deploy to GCP
+      uses: actions/checkout@v2
+      
+    - name: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        service_account: 'cf-deployer@governance-utils.iam.gserviceaccount.com'
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: Cloud Functions Deploy
+      # You may pin to the exact commit or the version.
+      # uses: google-github-actions/deploy-cloud-functions@baeb313f378bfcb3ec306eef9219185cb1e6c7fb
+      uses: google-github-actions/deploy-cloud-functions@v0.9.0
+      with:
+        name: ga4-to-bq-pipe
+        project_id: bondigest-318608
+        region: us-central1
+        source_dir: ./
+        entry_point: handle_update
+        runtime: python39
+        memory_mb: 1024
+        service_account_email: play-store-connect@governance-utils.iam.gserviceaccount.com
+        timeout: 120
