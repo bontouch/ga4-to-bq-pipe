@@ -1,6 +1,6 @@
 pandas==1.4.2
 pandas_gbq==0.17.4
-protobuf==4.21.2
+protobuf==3.20.1
 python_dateutil==2.8.2
 google==3.0.0
 google-analytics-data==0.11.2
