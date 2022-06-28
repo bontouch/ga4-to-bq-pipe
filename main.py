@@ -4,8 +4,6 @@ from google.analytics.data_v1beta.types import Dimension
 from google.analytics.data_v1beta.types import Metric
 from google.analytics.data_v1beta.types import RunReportRequest
 from google.cloud import firestore, bigquery
-from google.cloud.exceptions import NotFound
-from google.api_core.exceptions import Forbidden
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import calendar
